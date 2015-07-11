@@ -1,0 +1,24 @@
+{
+  "name": "tritmapped-terminal",
+  "description": "tricolor trit-mapped 45x28 character 9x14 terminal display",
+  "version": "0.0.1",
+  "main": "triterminal.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:/tritmapped-terminal.git"
+  },
+  "keywords": [
+    "ternary",
+    "base3",
+    "tritmapped",
+    "terminal",
+    "display"
+  ],
+  "scripts": {
+    "start": "wzrd demo.js"
+  },
+  "dependencies": {
+    "tritmapped-canvas": "*",
+    "trit-text": "*"
+  }
+}
