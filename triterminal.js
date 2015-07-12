@@ -50,11 +50,11 @@ Triterm.prototype.writeTTChar = function(tt) {
 Triterm.prototype.forward = function() {
   ++this.cursorX;
 
-  if (this.cursorX >= t.tc.width / CHAR_WIDTH) {
+  if (this.cursorX >= this.tc.width / CHAR_WIDTH) {
     this.cursorX = 0;
     ++this.cursorY;
   }
-  if (this.cursorY >= t.tc.width / CHAR_HEIGHT) {
+  if (this.cursorY >= this.tc.width / CHAR_HEIGHT) {
     this.cursorY = 0;
     this.cursorX = 0;
   }
