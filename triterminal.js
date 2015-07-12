@@ -46,11 +46,11 @@ Triterm.prototype.keydown = function(ev) {
     this.cursorX = 0;
   }
 
-  if (this.cursorX >= t.width / CHAR_WIDTH) {
+  if (this.cursorX >= t.tc.width / CHAR_WIDTH) {
     this.cursorX = 0;
     ++this.cursorY;
   }
-  if (this.cursorY >= t.width / CHAR_HEIGHT) {
+  if (this.cursorY >= t.tc.width / CHAR_HEIGHT) {
     this.cursorY = 0;
     this.cursorX = 0;
   }
