@@ -13,5 +13,8 @@ var t = Triterm({handleInput: function(tt, ev) {
   }
 }});
 
+t.writeUChar('H');
+t.writeUChar('i');
+
 global.t = t;
 
