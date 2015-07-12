@@ -17,25 +17,17 @@ function Triterm(opts) {
   this.cursorX = 0;
   this.cursorY = 0;
 
-  window.addEventListener('keydown', this.keydown.bind(this));
+  this.handleInput = opts.handleInput;
+
+  window.addEventListener('keydown', this.onkeydown.bind(this));
 };
 
-Triterm.prototype.keydown = function(ev) {
-  console.log(ev);
+Triterm.prototype.writeUChar = function(u) {
+  return this.writeTTChar(fromUnicode(u));
+};
 
-  if (ev.metaKey) {
-    // don't intercept cmd-key, allow e.g. cmd-r to reload browser
-    return;
-  }
-
-  ev.preventDefault(); // allow intercepting ctrl-key without executing browser default
-
-  var tt = fromEvent(ev);
-  if (tt === null) {
-    // no assigned key, ignore
-    return;
-  }
-
+// Write a trit-text character and advance the cursor
+Triterm.prototype.writeTTChar = function(tt) {
   this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, this.cursorY, this.cursorX);
   this.tc.refresh();
 
@@ -54,6 +46,25 @@ Triterm.prototype.keydown = function(ev) {
     this.cursorY = 0;
     this.cursorX = 0;
   }
+}
+
+Triterm.prototype.onkeydown = function(ev) {
+  //console.log(ev);
+
+  if (ev.metaKey) {
+    // don't intercept cmd-key, allow e.g. cmd-r to reload browser
+    return;
+  }
+
+  ev.preventDefault(); // allow intercepting ctrl-key without executing browser default
+
+  var tt = fromEvent(ev);
+  if (tt === null) {
+    // no assigned key, ignore
+    return;
+  }
+
+  if (this.handleInput) this.handleInput.call(this, tt);
 };
 
 module.exports = function(opts) {

@@ -2,6 +2,9 @@
 
 var Triterm = require('./');
 
-var t = Triterm();
+var t = Triterm({handleInput: function(tt) {
+  this.writeTTChar(tt);
+}});
+
 global.t = t;
 
