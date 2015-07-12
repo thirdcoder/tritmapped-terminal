@@ -2,9 +2,13 @@
 
 var Tricanvas = require('tritmapped-canvas');
 
-var toTritmap9x14 = require('trit-text').toTritmap9x14;
+var toTritmap  = require('trit-text').toTritmap9x14;
+var CHAR_HEIGHT = 14;
+var CHAR_WIDTH = 9;
+
 var fromUnicode = require('trit-text').fromUnicode;
 var fromEvent = require('trit-text').fromEvent;
+
 
 function Triterm(opts) {
   this.tc = Tricanvas(opts);
@@ -32,7 +36,7 @@ Triterm.prototype.keydown = function(ev) {
     return;
   }
 
-  this.tc.writeTrits(toTritmap9x14(tt), 9, 14, this.cursorY, this.cursorX);
+  this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, this.cursorY, this.cursorX);
   this.tc.refresh();
 
   ++this.cursorX;
@@ -42,11 +46,11 @@ Triterm.prototype.keydown = function(ev) {
     this.cursorX = 0;
   }
 
-  if (this.cursorX >= t.width/9) {
+  if (this.cursorX >= t.width / CHAR_WIDTH) {
     this.cursorX = 0;
     ++this.cursorY;
   }
-  if (this.cursorY >= t.width/14) {
+  if (this.cursorY >= t.width / CHAR_HEIGHT) {
     this.cursorY = 0;
     this.cursorX = 0;
   }
