@@ -18,6 +18,7 @@ function Triterm(opts) {
   this.cursorY = 0;
 
   this.handleInput = opts.handleInput;
+  this.cooked = opts.cooked !== undefined ? opts.cooked : true
 
   window.addEventListener('keydown', this.onkeydown.bind(this));
 };
@@ -28,15 +29,19 @@ Triterm.prototype.writeUChar = function(u) {
 
 // Write a trit-text character and advance the cursor
 Triterm.prototype.writeTTChar = function(tt) {
+  if (this.cooked) {
+    if (tt == 12) { // trit-text newline
+      this.cursorY++;
+      this.cursorX = 0;
+      return; // not displayed visually
+    }
+  }
+
+
   this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, this.cursorY, this.cursorX);
   this.tc.refresh();
 
   ++this.cursorX;
-
-  if (tt == 12) { // trit-text newline
-    this.cursorY++;
-    this.cursorX = 0;
-  }
 
   if (this.cursorX >= t.tc.width / CHAR_WIDTH) {
     this.cursorX = 0;
