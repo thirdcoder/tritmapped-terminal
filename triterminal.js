@@ -27,7 +27,12 @@ Triterm.prototype.writeUChar = function(u) {
   return this.writeTTChar(fromUnicode(u));
 };
 
-Triterm.prototype.setTTChar = function(tt) {
+Triterm.prototype.setTTChar = function(tt, x, y) {
+  this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, y, x);
+  this.tc.refresh();
+};
+
+Triterm.prototype.writeTTChar = function(tt) {
   if (this.cooked) {
     if (tt == 12) { // trit-text newline
       this.cursorY++;
@@ -36,15 +41,8 @@ Triterm.prototype.setTTChar = function(tt) {
     }
   }
 
-  this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, this.cursorY, this.cursorX);
-  this.tc.refresh();
-
-  return true;
-};
-
-Triterm.prototype.writeTTChar = function(tt) {
-  var show = this.setTTChar(tt);
-  if (show) this.forward();
+  this.setTTChar(tt, this.cursorX, this.cursorY);
+  this.forward();
 };
 
 Triterm.prototype.forward = function() {
