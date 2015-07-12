@@ -6,10 +6,17 @@ var toTritmap9x14 = require('trit-text').toTritmap9x14;
 var fromUnicode = require('trit-text').fromUnicode;
 var fromEvent = require('trit-text').fromEvent;
 
-window.t = Tricanvas();
+function Triterm(opts) {
+  this.tc = Tricanvas(opts);
+  this.tc.refresh();
 
-var cursorX = 0, cursorY = 0;
-window.addEventListener('keydown', function(ev) {
+  this.cursorX = 0;
+  this.cursorY = 0;
+
+  window.addEventListener('keydown', this.keydown.bind(this));
+};
+
+Triterm.prototype.keydown = function(ev) {
   console.log(ev);
 
   if (ev.metaKey) {
@@ -25,27 +32,27 @@ window.addEventListener('keydown', function(ev) {
     return;
   }
 
-  console.log(cursorX,cursorY);
-  t.writeTrits(toTritmap9x14(tt), 9, 14, cursorY, cursorX);
-  t.refresh();
+  this.tc.writeTrits(toTritmap9x14(tt), 9, 14, this.cursorY, this.cursorX);
+  this.tc.refresh();
 
-  ++cursorX;
+  ++this.cursorX;
 
   if (tt == 12) { // trit-text newline
-    cursorY++;
-    cursorX = 0;
+    this.cursorY++;
+    this.cursorX = 0;
   }
 
-  if (cursorX >= t.width/9) {
-    cursorX = 0;
-    ++cursorY;
+  if (this.cursorX >= t.width/9) {
+    this.cursorX = 0;
+    ++this.cursorY;
   }
-  if (cursorY >= t.width/14) {
-    cursorY = 0;
-    cursorX = 0;
+  if (this.cursorY >= t.width/14) {
+    this.cursorY = 0;
+    this.cursorX = 0;
   }
-});
+};
 
-  global.t = t;
+module.exports = function(opts) {
+  return new Triterm(opts);
+};
 
-t.refresh();

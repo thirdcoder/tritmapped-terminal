@@ -1,5 +1,7 @@
 'use strict';
 
-require('./');
-// TODO
+var Triterm = require('./');
+
+var t = Triterm();
+global.t = t;
 
