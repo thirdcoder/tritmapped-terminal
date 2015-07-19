@@ -12,7 +12,7 @@ var fromEvent = require('trit-text').fromEvent;
 
 function Triterm(opts) {
   this.tc = Tricanvas(opts);
-  this.tc.refresh();
+  this.refresh();
 
   this.cursorX = 0;
   this.cursorY = 0;
@@ -32,6 +32,9 @@ Triterm.prototype.writeUChar = function(u) {
 
 Triterm.prototype.setTTChar = function(tt, x, y) {
   this.tc.writeTrits(toTritmap(tt), CHAR_WIDTH, CHAR_HEIGHT, y, x);
+};
+
+Triterm.prototype.refresh = function() {
   this.tc.refresh();
 };
 

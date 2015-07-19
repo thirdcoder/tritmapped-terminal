@@ -10,11 +10,13 @@ var t = Triterm({handleInput: function(tt, ev) {
 
   if (tt !== null) {
     this.writeTTChar(tt);
+    t.refresh();
   }
 }});
 
 t.writeUChar('H');
 t.writeUChar('i');
+t.refresh();
 
 global.t = t;
 
