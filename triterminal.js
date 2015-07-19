@@ -18,7 +18,10 @@ function Triterm(opts) {
   this.cursorY = 0;
 
   this.handleInput = opts.handleInput;
-  this.cooked = opts.cooked !== undefined ? opts.cooked : true
+  this.cooked = opts.cooked !== undefined ? opts.cooked : true;
+
+  this.colCount = this.tc.width / CHAR_WIDTH;
+  this.rowCount = this.tc.height / CHAR_HEIGHT;
 
   window.addEventListener('keydown', this.onkeydown.bind(this));
 };
@@ -48,11 +51,11 @@ Triterm.prototype.writeTTChar = function(tt) {
 Triterm.prototype.forward = function() {
   ++this.cursorX;
 
-  if (this.cursorX >= this.tc.width / CHAR_WIDTH) {
+  if (this.cursorX >= this.colCount) {
     this.cursorX = 0;
     ++this.cursorY;
   }
-  if (this.cursorY >= this.tc.width / CHAR_HEIGHT) {
+  if (this.cursorY >= this.rowCount) {
     this.cursorY = 0;
     this.cursorX = 0;
   }
