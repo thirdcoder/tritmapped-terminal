@@ -5,7 +5,7 @@
   "main": "triterminal.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:/tritmapped-terminal.git"
+    "url": "git@github.com:thirdcoder/tritmapped-terminal.git"
   },
   "keywords": [
     "ternary",
@@ -18,7 +18,8 @@
     "start": "wzrd demo.js"
   },
   "dependencies": {
-    "tritmapped-canvas": "*",
-    "trit-text": "*"
-  }
+    "tritmapped-canvas": "^1.0.0",
+    "trit-text": "^1.0.0"
+  },
+  "license": "MIT"
 }
