@@ -1,7 +1,7 @@
 {
   "name": "tritmapped-terminal",
   "description": "tricolor tritmapped 45x28 character 9x14 terminal display",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "triterminal.js",
   "repository": {
     "type": "git",
