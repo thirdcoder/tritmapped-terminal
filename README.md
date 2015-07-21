@@ -15,6 +15,9 @@ Usage:
 Emulates a terminal wrapping a [tritmapped-canvas](https://github.com/thirdcoder/tritmapped-canvas),
 with 9x14 character output and keyboard input from [trit-text](https://github.com/thirdcoder/trit-text).
 
+For an example, run `npm start` or try the [live demo](http://thirdcoder.github.io/tritmapped-terminal).
+Type characters to write to the tritmapped trit-text terminal.
+
 Options:
 
 * `handleInput`: function to call with (tt, ev) [trit-text](https://github.com/thirdcoder/trit-text) character codepoint and HTML5 DOM event when user presses a key
