@@ -2,6 +2,8 @@
 
 Tricolor tritmapped 45x28 character 9x14 terminal display
 
+[![npm version](https://badge.fury.io/js/tritmapped-terminal.svg)](https://www.npmjs.com/package/tritmapped-terminal)
+
 Usage:
 
     var Triterm = require('tritmapped-terminal');
